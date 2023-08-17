@@ -1,53 +1,51 @@
-class NFT {
-  constructor(nftId, name, hair_color, age) {
-    this.nftId = nftId;
-    this.name = name;
-    this.hair_color = hair_color;
-    this.age = age;
-  }
-}
+/*
+Assessment Requirements
+1. Create a variable that can hold a number of NFT's. What type of variable might this be?
+2. Create an object inside your mintNFT function that will hold the metadata for your NFTs. 
+   The metadata values will be passed to the function as parameters. When the NFT is ready, 
+   you will store it in the variable you created in step 1
+3. Your listNFTs() function will print all of your NFTs metadata to the console (i.e. console.log("Name: " + someNFT.name))
+4. For good measure, getTotalSupply() should return the number of NFT's you have created
+*/
 
-class NFTCollection {
-  constructor() {
-    this.nfts = [];
-  }
+// create a variable to hold your NFT's
+const NFTs=[];
 
-  mintNFT(nftId, name, hair_color, age) {
-    const newNFT = new NFT(nftId, name, hair_color, age);
-    this.nfts.push(newNFT);
-    console.log(`Minted NFT ${nftId}: ${name}`);
-  }
-
-
-  printNFTDetails(nftId) {
-    const nft = this.nfts.find((nft) => nft.nftId === nftId);
-    if (nft) {
-      console.log(`\n--- NFT ${nftId} ---`);
-      console.log(`Name: ${nft.name}`);
-      console.log(`Hair Color: ${nft.hair_color}`);
-      console.log(`Age: ${nft.age}`);
-
-    } else {
-      console.log(`Error: NFT with ID ${nftId} not found.`);
+// this function will take in some values as parameters, create an
+// NFT object using the parameters passed to it for its metadata, 
+// and store it in the variable above.
+function mintNFT (_name, _hairColor, _age, _outfit) {
+    const NFT={
+        "name": _name,
+        "hairColor": _hairColor,
+        "age": _age,
+        "outfit": _outfit,
     }
-  }
-
-  printTotalSupply() {
-    console.log(`\nTotal supply of NFTs: ${this.nfts.length}`);
-  }
+    NFTs.push(NFT);
 }
 
-// Sample Usage:
-const nftCollection = new NFTCollection();
+// create a "loop" that will go through an "array" of NFT's
+// and print their metadata with console.log()
+function listNFTs () {
+    for(let i=0; i<NFTs.length; i++){
+        console.log("\nID: "+ (i+1));
+        console.log("Name: "+ NFTs[i].name);
+        console.log("Hair Color: " + NFTs[i].hairColor);
+        console.log("Age: " + NFTs[i].age);
+        console.log("Outfit: " + NFTs[i].outfit);
+    }
+}
 
-nftCollection.mintNFT(1, "Nick", "Grey", "32");
-nftCollection.mintNFT(2, "Bob", "Black", "21");
-nftCollection.mintNFT(3, "Kim", "Brown", "27");
-nftCollection.mintNFT(4, "Lee", "Golden", "24");
+// print the total number of NFTs we have minted to the console
+function getTotalSupply() {
+    console.log("\nTotal entries are " + NFTs.length);
+}
 
-nftCollection.printNFTDetails(1);
-nftCollection.printNFTDetails(2);
-nftCollection.printNFTDetails(3);
-nftCollection.printNFTDetails(4);
+// call your functions below this line
 
-nftCollection.printTotalSupply();
+mintNFT("Nikunj", "Black", "20", "Shirt");
+mintNFT("Mike", "Black", "25", "Shirt");
+mintNFT("Ron", "Brown", "23", "Jeans");
+mintNFT("Kim", "Grey", "22", "Formals");
+listNFTs();
+getTotalSupply();
